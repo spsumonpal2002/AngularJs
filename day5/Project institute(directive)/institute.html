@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sumon">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directive</title>
+    <script src="app\library\angular.min.js"></script>
+    <!-- <script src="app\library\angular-route.min.js"></script> -->
+    <script src="app\app.js"></script>
+    <link rel="stylesheet" href="content/CSS/style.css">
+</head>
+<body>
+    <header ng-include="'header.html'"></header>
+    <div class="content">
+        <div ng-controller="myappcontroller">
+
+            <button ng-click="order = 'name'">Order By Name</button>
+            <button ng-click="order = 'course'">Order By Course</button>
+            <input type="text"ng-model="s"placeholder="search students">
+            <ul>
+                <li ng-repeat="institutes in institute |orderBy: order | filter:s" ng-show="institutes.available" >
+                    <img ng-src="{{institutes.picture}}" style="margin: -12px 10px 0 0;float:left; width: 50px;"ng-show="institutes.picture">
+                    <h3>{{institutes.name +"⇒"+institutes.course +"▮"+institutes.code | uppercase}}</h3>
+                    <div class="remove" ng-click="removedata(institutes)">X</div>
+                    <span>{{institutes.fees | currency}}</span>
+                </li>
+            </ul>
+            <form ng-submit="addstudent()">
+                <input type="text" placeholder="name" ng-model="student.name"><br><br><br>
+                <input type="text" placeholder="course" ng-model="student.course"><br><br><br>
+                <input type="number" placeholder="code" ng-model="student.code"><br><br><br>
+                <input type="number" placeholder="fees" ng-model="student.fees"><br><br><br>
+                <input type="submit" value="Add New Student"><br><br>
+            </form>
+            
+        </div>
+    </div>
+    
+    
+</body>
+</html>
